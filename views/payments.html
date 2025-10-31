@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cashfree Checkout Integration</title>
+    <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+
+    <style>
+      /* Basic reset and font settings */
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      /* The main container card */
+      .payment-container {
+        background-color: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        text-align: center;
+        max-width: 400px;
+        width: 90%;
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .payment-container:hover {
+        transform: translateY(-5px);
+      }
+
+      /* Heading style */
+      h1 {
+        color: #1c2b36;
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+      }
+
+      /* Paragraph text style */
+      p {
+        color: #5a6a78;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      /* The "Pay Now" button */
+      #renderBtn {
+        background-image: linear-gradient(to right, #00c6ff 0%, #0072ff 100%);
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 50px; /* Pill shape */
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+      }
+
+      /* Hover effect for the button */
+      #renderBtn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 20px rgba(0, 114, 255, 0.4);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="payment-container">
+      <h1>Complete Your Payment</h1>
+      <p>
+        Click the button below to proceed to our secure checkout page and
+        finalize your purchase.
+      </p>
+      <button id="renderBtn">Pay Now</button>
+    </div>
+
+    <script src="/js/payments.js"></script>
+  </body>
+</html>

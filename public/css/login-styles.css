@@ -1,0 +1,136 @@
+/* General body styling */
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Main container for the form */
+.form-container {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+/* Form header styling */
+.form-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.form-header p {
+  color: #64748b;
+  margin-bottom: 2rem;
+}
+
+/* Styling for form groups (label + input) */
+.form-group {
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #475569;
+}
+
+/* General input field styling */
+.form-group input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+  color: #94a3b8;
+}
+
+/* Style for input fields on focus */
+.form-group input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Styling for the 'Forgot Password' link container */
+.form-options {
+  text-align: right;
+  margin-bottom: 1.5rem;
+  margin-top: -0.5rem; /* Adjusts spacing to be closer to the password input */
+}
+
+.form-options .forgot-password-link {
+  color: #2563eb;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: text-decoration 0.2s;
+}
+
+.form-options .forgot-password-link:hover {
+  text-decoration: underline;
+}
+
+/* Submit button styling */
+.submit-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-top: 0.5rem;
+}
+
+.submit-btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* Message area for feedback */
+#message {
+  margin-top: 1.5rem;
+  font-weight: 500;
+}
+
+/* Form footer for login/signup link */
+.form-footer {
+  margin-top: 2rem;
+  color: #64748b;
+}
+
+.form-footer a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+  transition: text-decoration 0.2s;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}

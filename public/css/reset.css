@@ -1,0 +1,124 @@
+/* --- Global Styles & Variables --- */
+:root {
+  --primary-color: #007bff; /* A nice blue */
+  --primary-hover-color: #0056b3;
+  --light-gray-color: #f8f9fa;
+  --medium-gray-color: #dee2e6;
+  --dark-gray-color: #6c757d;
+  --text-color: #343a40;
+  --white-color: #ffffff;
+  --error-color: #dc3545;
+  --success-color: #28a745;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--light-gray-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* --- Main Container Card --- */
+.container {
+  background-color: var(--white-color);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+/* --- Typography --- */
+h1 {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.subtitle {
+  margin-bottom: 30px;
+  color: var(--dark-gray-color);
+  font-size: 0.95rem;
+}
+
+/* --- Form Styles --- */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--medium-gray-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition:
+    border-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+/* Style for input focus state */
+input[type="password"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* --- Button Styles --- */
+button {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease-in-out,
+    transform 0.1s ease;
+}
+
+button:hover {
+  background-color: var(--primary-hover-color);
+}
+
+button:active {
+  transform: scale(0.98); /* Slight shrink effect on click */
+}
+
+/* --- Message Paragraph --- */
+#message {
+  margin-top: 20px;
+  font-weight: 500;
+}
+
+/* Example classes you could add via JavaScript */
+.message-success {
+  color: var(--success-color);
+}
+
+.message-error {
+  color: var(--error-color);
+}
