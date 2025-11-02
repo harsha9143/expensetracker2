@@ -1,3 +1,5 @@
+const ipadd = "13.204.63.156";
+
 const cashfree = Cashfree({
   mode: "sandbox",
 });
@@ -5,7 +7,7 @@ const cashfree = Cashfree({
 const token = localStorage.getItem("token");
 
 document.getElementById("renderBtn").addEventListener("click", async () => {
-  const makePayment = await fetch("http://localhost:4000/payments", {
+  const makePayment = await fetch(`http://${ipadd}/payments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

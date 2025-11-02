@@ -1,18 +1,21 @@
+const ipadd = "13.204.63.156";
+
+const loginLink = document.getElementById("login-link");
+
+loginLink.setAttribute("href", `http://${ipadd}/auth/login`);
+
 async function handleOnSubmit(e) {
   e.preventDefault();
 
   const email = e.target.email.value;
 
-  const resetPassword = await fetch(
-    "http://localhost:4000/auth/reset-password",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email }),
-    }
-  );
+  const resetPassword = await fetch(`http://${ipadd}/auth/reset-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+  });
 
   const data = await resetPassword.json();
 

@@ -1,3 +1,8 @@
+const ipadd = "13.204.63.156";
+
+const loginLink = document.getElementById("login-link");
+loginLink.setAttribute("href", `http://${ipadd}/auth/login`);
+
 async function handleOnSubmit(e) {
   e.preventDefault();
 
@@ -6,7 +11,7 @@ async function handleOnSubmit(e) {
   const password = e.target.password.value;
   const confirmPassword = e.target.confirmPassword.value;
 
-  const createUser = await fetch("http://localhost:4000/auth/sign-up", {
+  const createUser = await fetch(`http://${ipadd}/auth/sign-up`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +27,7 @@ async function handleOnSubmit(e) {
   if (createUser.status === 201) {
     msg.style.color = "green";
     setTimeout(() => {
-      window.location.href = "http://localhost:4000/auth/login";
+      window.location.href = `http://${ipadd}/auth/login`;
     }, 1000);
   } else {
     msg.style.color = "red";

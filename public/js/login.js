@@ -1,10 +1,20 @@
+const ipadd = "13.204.63.156";
+
+const forgotPass = document.getElementById("forgot-pass-link");
+
+forgotPass.setAttribute("href", `http://${ipadd}/auth/forgot-password`);
+
+const signup = document.getElementById("signup-link");
+
+signup.setAttribute("href", `http://${ipadd}/auth/sign-up`);
+
 async function handleOnSubmit(event) {
   event.preventDefault();
 
   const email = event.target.email.value;
   const password = event.target.password.value;
 
-  const login = await fetch("http://localhost:4000/auth/login", {
+  const login = await fetch(`http://${ipadd}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,7 +31,7 @@ async function handleOnSubmit(event) {
     msg.style.color = "green";
     localStorage.setItem("token", data.token);
     setTimeout(() => {
-      window.location.href = "http://localhost:4000/expenses";
+      window.location.href = `http://${ipadd}/expenses`;
     }, 1500);
   } else {
     msg.style.color = "red";

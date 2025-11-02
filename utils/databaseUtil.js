@@ -1,11 +1,11 @@
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(
-  "full_stack_expense_tracker",
-  "root",
-  "vm4udte@W",
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASS,
   {
-    host: "localhost",
+    host: process.env.DB_HOST,
     dialect: "mysql",
   }
 );

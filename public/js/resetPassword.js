@@ -1,3 +1,5 @@
+const ipadd = "13.204.63.156";
+
 async function handleOnSubmit(e) {
   e.preventDefault();
 
@@ -9,16 +11,13 @@ async function handleOnSubmit(e) {
 
   const uuid = urlParams.get("uuid");
 
-  const setPassword = await fetch(
-    "http://localhost:4000/auth/set-new-password",
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ password, confirmPassword, uuid }),
-    }
-  );
+  const setPassword = await fetch(`http://${ipadd}/auth/set-new-password`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ password, confirmPassword, uuid }),
+  });
 
   const data = await setPassword.json();
 
@@ -28,7 +27,7 @@ async function handleOnSubmit(e) {
   if (setPassword.status === 200) {
     message.style.color = "green";
     setTimeout(() => {
-      window.location.href = "http://localhost:4000/auth/login";
+      window.location.href = `http://${ipadd}/auth/login`;
     }, 1000);
   } else {
     message.style.color = "red";

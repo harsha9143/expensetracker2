@@ -25,7 +25,7 @@ exports.resetPasswordUtil = async (uuid, name, email) => {
       textContent: "Click on the link to reset your password",
       htmlContent: `<h2>Hello ${name},</h2>
         <p>Click the button below to reset your password:</p>
-        <a href="http://localhost:4000/auth/password-reset?uuid=${uuid}" 
+        <a href="http://13.204.63.156/auth/password-reset?uuid=${uuid}" 
            style="display:inline-block;padding:10px 15px;background:#007bff;color:white;text-decoration:none;border-radius:5px;">
           Reset Password
         </a>`,

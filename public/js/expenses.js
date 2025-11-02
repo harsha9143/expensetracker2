@@ -1,3 +1,9 @@
+const ipadd = "13.204.63.156";
+
+const premium = document.getElementById("premium");
+
+premium.setAttribute("href", `http://${ipadd}/payments`);
+
 window.addEventListener("DOMContentLoaded", () => initialize());
 
 document
@@ -10,11 +16,11 @@ async function initialize(page = 1, limit = 5) {
   const token = localStorage.getItem("token");
   if (!token) {
     alert("no session found....please login");
-    window.location.href = "http://localhost:4000/auth/login";
+    window.location.href = `http://${ipadd}/auth/login`;
     return;
   }
 
-  const res = await fetch("http://localhost:4000/verify-token", {
+  const res = await fetch(`http://${ipadd}/verify-token`, {
     headers: {
       Authorization: "Bearer " + token,
     },
@@ -23,14 +29,14 @@ async function initialize(page = 1, limit = 5) {
   if (res.status !== 200) {
     alert("session expired");
     localStorage.removeItem("token");
-    window.location.href = "http://localhost:4000/auth/login";
+    window.location.href = `http://${ipadd}/auth/login`;
     return;
   }
 
   const table = document.getElementById("expenses-list");
 
   const expenses = await fetch(
-    `http://localhost:4000/expenses/items?page=${page}&limit=${limit}`,
+    `http://${ipadd}/expenses/items?page=${page}&limit=${limit}`,
     {
       headers: {
         Authorization: "Bearer " + token,
@@ -50,7 +56,7 @@ async function initialize(page = 1, limit = 5) {
 
   showPagination(paginationData);
 
-  const user = await fetch("http://localhost:4000/expenses/user-type", {
+  const user = await fetch(`http://${ipadd}/expenses/user-type`, {
     headers: {
       Authorization: "Bearer " + token,
     },
@@ -82,7 +88,7 @@ async function handleOnSubmit(e) {
   const price = e.target.price.value;
   const description = e.target.description.value;
 
-  const addItem = await fetch("http://localhost:4000/expenses", {
+  const addItem = await fetch(`http://${ipadd}/expenses`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -128,7 +134,7 @@ async function getLeaderBoard(token) {
   leader_board.style.display = "";
 
   const userwiseExpenses = await fetch(
-    "http://localhost:4000/expenses/user-wise-expenses",
+    `http://${ipadd}/expenses/user-wise-expenses`,
     {
       headers: {
         Authorization: "Bearer " + token,
@@ -151,7 +157,7 @@ async function getLeaderBoard(token) {
 
 async function removeItem(tr, id, page, limit) {
   const token = localStorage.getItem("token");
-  const delItem = await fetch("http://localhost:4000/expenses/remove-expense", {
+  const delItem = await fetch(`http://${ipadd}/expenses/remove-expense`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -209,12 +215,12 @@ function showPagination({
 
 document.getElementById("logout-btn").addEventListener("click", () => {
   localStorage.removeItem("token");
-  window.location.href = "http://localhost:4000/auth/login";
+  window.location.href = `http://${ipadd}/auth/login`;
 });
 
 document.getElementById("download-btn").addEventListener("click", async () => {
   const token = localStorage.getItem("token");
-  const downloadURL = await fetch("http://localhost:4000/expenses/download", {
+  const downloadURL = await fetch(`http://${ipadd}/expenses/download`, {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
@@ -225,6 +231,6 @@ document.getElementById("download-btn").addEventListener("click", async () => {
   if (url.success) {
     window.open(url.url, "_blank");
   } else {
-    window.open("http://localhost:4000/error", "_blank");
+    window.open("http://${ipadd}/error", "_blank");
   }
 });
