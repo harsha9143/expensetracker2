@@ -231,6 +231,6 @@ document.getElementById("download-btn").addEventListener("click", async () => {
   if (url.success) {
     window.open(url.url, "_blank");
   } else {
-    window.open("http://${ipadd}/error", "_blank");
+    window.open(`http://${ipadd}/error`, "_blank");
   }
 });
