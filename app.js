@@ -23,14 +23,14 @@ const Download = require("./models/download");
 
 const app = express();
 
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  { flags: "a" }
-);
+// const accessLogStream = fs.createWriteStream(
+//   path.join(__dirname, "access.log"),
+//   { flags: "a" }
+// );
 
 app.use(cors());
 app.use(compression());
-app.use(morgan("combined", { stream: accessLogStream }));
+app.use(morgan("combined"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -65,7 +65,7 @@ db.sync()
   .then(() => {
     app.listen(process.env.PORT, () => {
       console.log(
-        `connection eshtablished successfully http://localhost:${process.env.PORT}/auth/login`
+        `connection eshtablished successfully http://13.204.63.156/auth/login`
       );
     });
   })
