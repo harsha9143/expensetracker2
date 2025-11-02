@@ -27,7 +27,7 @@ exports.createOrder = async (
         customer_phone: customerPhone,
       },
       order_meta: {
-        return_url: `http://13.204.63.156/payments/payment-status/${orderId}`,
+        return_url: `http://13.233.234.203/payments/payment-status/${orderId}`,
         payment_methods: "cc,dc,upi",
       },
       order_expiry_time: formattedExpiryDate,

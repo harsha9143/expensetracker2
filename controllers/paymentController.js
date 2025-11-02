@@ -77,7 +77,7 @@ exports.paymentStatus = async (req, res) => {
       return res.status(400).send(`<h2>Payment Status</h2>
       <p>Order ID: ${req.params.orderId}</p>
       <p>Status: ${payment_status}</p>
-      <a href="a href="http://13.204.63.156/expenses">Back to Home</a>`);
+      <a href="http://13.233.234.203/expenses">Back to Home</a>`);
     }
 
     if (payment_status === "Success") {
@@ -97,7 +97,7 @@ exports.paymentStatus = async (req, res) => {
     return res.status(200).send(`<h2>Payment Status</h2>
       <p>Order ID: ${req.params.orderId}</p>
       <p>Status: ${payment_status}</p>
-      <a href="http://13.204.63.156/expenses">Back to Home</a>`);
+      <a href="http://13.233.234.203/expenses">Back to Home</a>`);
   } catch (error) {
     await transaction.rollback();
     console.log(error.message);

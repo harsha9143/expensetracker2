@@ -65,7 +65,7 @@ db.sync()
   .then(() => {
     app.listen(process.env.PORT, () => {
       console.log(
-        `connection eshtablished successfully http://13.204.63.156/auth/login`
+        `connection eshtablished successfully http://13.233.234.203/auth/login`
       );
     });
   })

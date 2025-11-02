@@ -1,4 +1,4 @@
-const ipadd = "13.204.63.156";
+const ipadd = "13.233.234.203";
 
 const premium = document.getElementById("premium");
 
