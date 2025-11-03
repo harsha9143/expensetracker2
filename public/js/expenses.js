@@ -172,7 +172,7 @@ async function removeItem(tr, id, page, limit, table) {
 
   const remainingRows = table.querySelectorAll("tr").length;
 
-  if (remainingRows === 0 && page === 1) {
+  if (remainingRows === 0 && page > 1) {
     page = page - 1;
   }
 
