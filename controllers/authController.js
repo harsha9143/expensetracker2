@@ -89,14 +89,6 @@ exports.loginUser = async (req, res) => {
       return res.status(401).json({ message: "Incorrect password" });
     }
 
-    console.log("backend started 2");
-
-    console.log(
-      "API keys",
-      process.env.JWT_SECRET_KEY,
-      process.env.JWT_EXPIRES_IN
-    );
-
     const token = jwt.sign(
       { id: user.id, email, name: user.name },
       process.env.JWT_SECRET_KEY,

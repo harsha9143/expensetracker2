@@ -14,7 +14,6 @@ exports.createOrder = async (
   customerPhone
 ) => {
   try {
-    console.log("entered into service");
     const expiryDate = new Date(Date.now() + 60 * 60 * 1000);
     const formattedExpiryDate = expiryDate.toISOString();
 
@@ -33,15 +32,12 @@ exports.createOrder = async (
       order_expiry_time: formattedExpiryDate,
     };
 
-    console.log("Creating Cashfree order with:", request);
-
     const response = await cashfree.PGCreateOrder(request);
-
-    console.log("Cashfree API response:", response.data);
 
     return response.data.payment_session_id;
   } catch (error) {
     console.log("Error while doing payment");
+    return null;
   }
 };
 

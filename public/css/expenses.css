@@ -142,30 +142,81 @@ td .delete-btn:hover {
 }
 
 header {
+  background: linear-gradient(90deg, #007bff, #00bcd4);
+  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  margin-bottom: 20px;
+  padding: 15px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-radius: 0 0 15px 15px;
 }
+
 #welcome {
-  margin: 0;
-  font-size: 1.8em;
-  text-transform: capitalize;
-  color: #2c3e50;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Premium Button */
+.premium-btn {
+  background: gold;
+  color: #333;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.premium-btn:hover {
+  background: #ffcc00;
+  transform: scale(1.05);
+}
+
+/* Logout Button */
 #logout-btn {
-  background-color: #e74c3c;
-  margin: 0;
-  border: 1px solid #e74c3c;
+  background: #ff4d4d;
+  border: none;
   color: white;
-  font-size: 20px;
-  padding: 5px;
-  border-radius: 5px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    transform 0.2s;
 }
+
 #logout-btn:hover {
-  background-color: #c0392b;
+  background: #ff2e2e;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    padding: 10px 20px;
+  }
+
+  #welcome {
+    font-size: 1.2rem;
+  }
+
+  .header-right {
+    flex-direction: column;
+    gap: 8px;
+  }
 }

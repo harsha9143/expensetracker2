@@ -18,8 +18,15 @@
   </head>
   <body>
     <header>
-      <h1 id="welcome"></h1>
-      <button id="logout-btn" title="Click here to logout">Logout</button>
+      <div class="header-left">
+        <h1 id="welcome">Welcome, User!</h1>
+      </div>
+      <div class="header-right">
+        <a id="premium" class="premium-btn" style="display: none"
+          >🌟 Get Premium</a
+        >
+        <button id="logout-btn" title="Click here to logout">Logout</button>
+      </div>
     </header>
     <div class="container">
       <h1>Expense Tracker 📊</h1>
@@ -80,7 +87,6 @@
         <div id="pagination"></div>
       </div>
       <div id="actions">
-        <a id="premium" style="display: none">Get premium</a>
         <button id="leader-btn" style="display: none">Show Leaderboard</button>
       </div>
       <br />

@@ -1,6 +1,6 @@
 //core modules
 const path = require("path");
-const fs = require("fs");
+//const fs = require("fs");
 
 //third party modules
 require("dotenv").config();
