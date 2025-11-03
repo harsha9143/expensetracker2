@@ -126,7 +126,9 @@ function display(table, item, page, limit) {
   tr.appendChild(td);
   table.appendChild(tr);
 
-  del.addEventListener("click", () => removeItem(tr, item.id, page, limit));
+  del.addEventListener("click", () =>
+    removeItem(tr, item.id, page, limit, table)
+  );
 }
 
 async function getLeaderBoard(token) {
@@ -155,7 +157,7 @@ async function getLeaderBoard(token) {
   }
 }
 
-async function removeItem(tr, id, page, limit) {
+async function removeItem(tr, id, page, limit, table) {
   const token = localStorage.getItem("token");
   const delItem = await fetch(`http://${ipadd}/expenses/remove-expense`, {
     method: "DELETE",
@@ -167,6 +169,13 @@ async function removeItem(tr, id, page, limit) {
   });
 
   tr.remove();
+
+  const remainingRows = table.querySelectorAll("tr").length;
+
+  if (remainingRows === 0 && page === 1) {
+    page = page - 1;
+  }
+
   initialize(page, limit);
 
   const data = await delItem.json();

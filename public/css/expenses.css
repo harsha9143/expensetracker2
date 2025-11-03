@@ -147,7 +147,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 7px 40px;
+  padding: 5px 40px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
