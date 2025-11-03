@@ -13,9 +13,10 @@ document
   );
 
 async function initialize(page = 1, limit = 5) {
+  document.getElementById("main-content").style.display = "none";
   const token = localStorage.getItem("token");
   if (!token) {
-    alert("no session found....please login");
+    alert("Please login first");
     window.location.href = `http://${ipadd}/auth/login`;
     return;
   }
@@ -32,6 +33,8 @@ async function initialize(page = 1, limit = 5) {
     window.location.href = `http://${ipadd}/auth/login`;
     return;
   }
+
+  document.getElementById("main-content").style.display = "block";
 
   const table = document.getElementById("expenses-list");
 
