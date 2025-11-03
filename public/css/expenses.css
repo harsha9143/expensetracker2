@@ -142,12 +142,12 @@ td .delete-btn:hover {
 }
 
 header {
-  background: linear-gradient(90deg, #007bff, #00bcd4);
+  background: linear-gradient(90deg, #0577f0, #f4f5f6);
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
+  padding: 7px 40px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
