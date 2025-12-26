@@ -8,6 +8,7 @@ const express = require("express");
 const cors = require("cors");
 const compression = require("compression");
 const morgan = require("morgan");
+const { default: mongoose } = require("mongoose");
 
 //local modules
 const authRouter = require("./routes/authRouter");
@@ -35,15 +36,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-User.hasMany(Expense);
-Expense.belongsTo(User);
-
-User.hasMany(Payments);
-Payments.belongsTo(User);
-
-User.hasMany(Download);
-Download.belongsTo(User);
-
 app.use("/", (req, res, next) => {
   console.log("Middleware 1");
   next();
@@ -61,7 +53,8 @@ app.use("/error", (req, res) => {
   res.status(404).send("Error!! something went wrong");
 });
 
-db.sync()
+mongoose
+  .connect(process.env.mongoUrl)
   .then(() => {
     app.listen(process.env.PORT, () => {
       console.log(

@@ -3,15 +3,15 @@ const path = require("path");
 
 //third party modules
 const bcrypt = require("bcrypt");
+const mongodb = require("mongodb");
 const jwt = require("jsonwebtoken");
-const { v4 } = require("uuid");
 require("dotenv").config();
 
 //local modules
 const User = require("../models/user");
 const { resetPasswordUtil } = require("../utils/resetPasswordUtil");
-const PasswordReset = require("../models/passwordReset");
 const sequelize = require("../utils/databaseUtil");
+const PasswordReset = require("../models/passwordReset");
 
 exports.signupPage = (req, res) => {
   res.sendFile(path.join(__dirname, "../views", "signup.html"));
@@ -19,18 +19,13 @@ exports.signupPage = (req, res) => {
 
 exports.addUser = async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
-  const transaction = await sequelize.transaction();
 
   try {
     if (password !== confirmPassword) {
       return res.status(400).json({ message: "password does not match" });
     }
 
-    const user = await User.findOne({
-      where: {
-        email,
-      },
-    });
+    const user = await User.findOne({ email: email });
 
     if (user) {
       return res
@@ -38,24 +33,13 @@ exports.addUser = async (req, res) => {
         .json({ message: "User with email already exists" });
     }
 
-    const hashedPassowrd = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await User.create(
-      {
-        name,
-        email,
-        password: hashedPassowrd,
-      },
-      { transaction }
-    );
+    const newUser = new User({ name, email, password: hashedPassword });
+    await newUser.save();
 
-    if (!newUser) {
-      return res.status(502).json({ message: "User creation failed" });
-    }
-    await transaction.commit();
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
-    await transaction.rollback();
     console.log("error creating user", error.message);
     res.status(500).json({ message: "Internal server error" });
   }
@@ -71,11 +55,7 @@ exports.loginUser = async (req, res) => {
   try {
     console.log("backend started");
 
-    const user = await User.findOne({
-      where: {
-        email,
-      },
-    });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res
@@ -107,15 +87,10 @@ exports.forgotPasswordPage = (req, res) => {
 };
 
 exports.resetPassword = async (req, res) => {
-  const transaction = await sequelize.transaction();
   try {
     const { email } = req.body;
 
-    const user = await User.findOne({
-      where: {
-        email,
-      },
-    });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res
@@ -123,35 +98,32 @@ exports.resetPassword = async (req, res) => {
         .json({ message: "User with this email does not exist" });
     }
 
-    const uuid = v4();
-
-    const trans = await resetPasswordUtil(uuid, user.name, user.email);
+    const trans = await resetPasswordUtil(
+      user._id.toString(),
+      user.name,
+      user.email
+    );
 
     if (!trans) {
       return res.status(500).json({ message: "Internal server error" });
     }
 
-    await PasswordReset.create(
-      {
-        uuid,
-        userId: user.id,
-        isActive: "YES",
-        expiresAt: new Date(Date.now() + 10 * 60 * 1000),
-      },
-      { transaction }
-    );
+    const passwordReset = new PasswordReset({
+      userId: new mongodb.ObjectId(user._id.toString()),
+    });
+    await passwordReset.save();
 
-    await transaction.commit();
     res.status(200).json({ message: "Password reset link sent to your email" });
   } catch (error) {
-    await transaction.rollback();
     console.log(error.message);
   }
 };
 
 exports.resetPasswordPage = async (req, res) => {
   try {
-    const resetData = await PasswordReset.findByPk(req.query.uuid);
+    const resetData = await PasswordReset.find({
+      _id: new mongodb.ObjectId(req.query.uuid),
+    });
 
     if (!resetData) {
       return res
@@ -166,7 +138,6 @@ exports.resetPasswordPage = async (req, res) => {
 };
 
 exports.setNewPassword = async (req, res) => {
-  const transaction = await sequelize.transaction();
   try {
     const { password, confirmPassword, uuid } = req.body;
 
@@ -174,13 +145,15 @@ exports.setNewPassword = async (req, res) => {
       return res.status(400).json({ message: "Password does not match!!!" });
     }
 
-    const active = await PasswordReset.findByPk(uuid);
+    const resetData = await PasswordReset.find({
+      _id: new mongodb.ObjectId(req.query.uuid),
+    });
 
-    if (!active) {
+    if (!resetData) {
       return res.status(419).send("Session Timeout");
     }
 
-    const user = await User.findByPk(active.userId);
+    const user = await User.find(resetData.userId);
 
     if (!user) {
       return res.status(400).send("User not found");
@@ -198,15 +171,12 @@ exports.setNewPassword = async (req, res) => {
 
     user.password = hashedPassword;
 
-    await user.save({ transaction });
+    await user.save();
 
-    await active.destroy({ transaction });
-
-    await transaction.commit();
+    await resetData.destroy();
 
     res.status(200).json({ message: "Password reset successful" });
   } catch (error) {
-    await transaction.rollback();
     res.status(500).send("Internal server error");
   }
 };

@@ -1,23 +1,18 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../utils/databaseUtil");
+const mongoose = require("mongoose");
 
-const PasswordReset = sequelize.define("password_reset", {
-  uuid: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    primaryKey: true,
-  },
+const PasswordResetSchema = new mongoose.Schema({
   userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
   },
   isActive: {
-    type: DataTypes.STRING,
+    type: String,
   },
   expiresAt: {
-    type: DataTypes.DATE,
-    allowNull: false,
+    type: Date,
+    required: true,
   },
 });
 
-module.exports = PasswordReset;
+module.exports = mongoose.model("PasswordReset", PasswordResetSchema);
